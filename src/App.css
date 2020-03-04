@@ -7,8 +7,14 @@ form{
 input {
     width: 100%;
 }
+input[type='checkbox']{
+    height: 30px;
+    justify-content: flex-end;
+    width: 30px;
+}
 input[type='checkbox']:focus{
     box-shadow: none;
+
 }
 label{
     font-size: 18px;
@@ -20,5 +26,15 @@ html{
 }
 #root{
     background-image: url("assets/bg.jpg") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
     padding: 10rem;
+}
+.form_shadow{
+    box-shadow: 0 2px 20px 17px rgba(73, 73, 73, 0.75) !important;
+}
+pre{
+    margin-top: 2rem;
+    color: red;
+    background-color: whitesmoke;
 }
