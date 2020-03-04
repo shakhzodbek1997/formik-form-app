@@ -34,11 +34,17 @@ class MiniFormik extends React.Component {
         }));
     };
 
+    handleSubmit = e =>{
+      e.preventDefault();
+      // validate
+      this.props.onSubmit(this.state.values);
+    };
     render() {
         return this.props.children({
             ...this.state,
             handleChange: this.handleChange,
             handleBlur: this.handleBlur,
+            handleSubmit: this.handleSubmit
         });
     }
 }
@@ -49,11 +55,21 @@ class Reservation extends React.Component {
             <MiniFormik initialValues={{
                 isGoing: true,
                 numberOfGuests: 2,
-            }}>
-                {(props) => {
-                    const {values, errors, touched, handleChange, handleBLur} = props;
+            }}
+            onSubmit={values => alert(JSON.stringify(values, null, 2))}
+            >
+                {props => {
+                    const {
+                        values,
+                        errors,
+                        touched,
+                        handleSubmit,
+                        handleChange,
+                        handleBLur
+                    } = props;
                     return(
-                    <form className="border form_shadow rounded bg-transparent text-white p-5">
+                    <form
+                        className="border form_shadow rounded bg-transparent text-white p-5">
                         <label className="d-flex justify-content-between">
                             Is going:
                             <input
@@ -76,7 +92,12 @@ class Reservation extends React.Component {
                                 value={values.numberOfGuests}
                                 onChange={handleChange}/>
                         </label>
-                        <input type="submit" className="form-control bg-success border-success  text-white"/>
+
+                        <input
+                            onClick={handleSubmit}
+                            type="submit"
+                            className="form-control bg-success border-success  text-white"
+                        />
                         <pre className="my-3 rounded p-3">{JSON.stringify(props, null, 2)}</pre>
                     </form>
                 )}}
